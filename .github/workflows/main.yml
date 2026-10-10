@@ -12,9 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install CMake
-      uses: sharkdp/setup-cmake@v2
-
     - name: Configure CMake
       run: cmake -B build -A x64
 
