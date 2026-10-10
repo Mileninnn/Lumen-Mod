@@ -8,28 +8,13 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-
     steps:
     - uses: actions/checkout@v4
-
-    - name: Find and Build
-      shell: pwsh
-      run: |
-        Write-Host "Searching for CMakeLists.txt..."
-        $cmakeFile = Get-ChildItem -Path . -Filter "CMakeLists.txt" -Recurse | Select-Object -First 1
-
-        if ($null -eq $cmakeFile) {
-            Write-Error "Could not find CMakeLists.txt anywhere in the repository!"
-            exit 1
-        }
-
-        $sourceDir = $cmakeFile.DirectoryName
-        Write-Host "Found CMakeLists.txt at: $sourceDir"
-
-        cmake -B build -S $sourceDir -A x64
-        cmake --build build --config Release
-
-    - name: Upload DLL
+    - name: Configure
+      run: cmake -B build -S . -A x64
+    - name: Build
+      run: cmake --build build --config Release
+    - name: Upload
       uses: actions/upload-artifact@v4
       with:
         name: Lumen-DLL
