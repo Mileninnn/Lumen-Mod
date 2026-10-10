@@ -29,25 +29,6 @@ add_library(Lumen SHARED
     ${imgui_SOURCE_DIR}/imgui.cpp
     ${imgui_SOURCE_DIR}/imgui_draw.cpp
     ${imgui_SOURCE_DIR}/imgui_tables.cpp
-
-FetchContent_Declare(
-  imgui
-  GIT_REPOSITORY https://github.com/ocornut/imgui.git
-  GIT_TAG v1.90.4
-)
-FetchContent_MakeAvailable(imgui)
-
-add_library(Lumen SHARED
-    src/dllmain.cpp
-    src/Config.cpp
-    src/gui/LumenMenu.cpp
-    src/gui/LumenOverlay.cpp
-    src/hooks/DeferredShadingHook.cpp
-    src/hooks/MaterialRedirectHook.cpp
-    src/hooks/Memory.cpp
-    ${imgui_SOURCE_DIR}/imgui.cpp
-    ${imgui_SOURCE_DIR}/imgui_draw.cpp
-    ${imgui_SOURCE_DIR}/imgui_tables.cpp
     ${imgui_SOURCE_DIR}/imgui_widgets.cpp
     ${imgui_SOURCE_DIR}/backends/imgui_impl_win32.cpp
     ${imgui_SOURCE_DIR}/backends/imgui_impl_dx12.cpp
