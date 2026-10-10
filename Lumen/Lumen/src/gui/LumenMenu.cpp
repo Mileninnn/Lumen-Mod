@@ -18,9 +18,9 @@ void DrawLumenMenu(bool *open) {
   ImGui::Text("Mod Status: ");
   ImGui::SameLine();
   if (params) {
-    ImGui::TextColored(ImVec2(0, 1, 0, 1), "ACTIVE");
+    ImGui::TextColored(ImVec4(0, 1, 0, 1), "ACTIVE");
   } else {
-    ImGui::TextColored(ImVec2(1, 0, 0, 1), "INACTIVE (Check Signatures)");
+    ImGui::TextColored(ImVec4(1, 0, 0, 1), "INACTIVE (Check Signatures)");
   }
   ImGui::Separator();
 
