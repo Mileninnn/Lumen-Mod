@@ -10,11 +10,24 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Configure
-      run: cmake -B build -S . -A x64
-    - name: Build
-      run: cmake --build build --config Release
-    - name: Upload
+
+    - name: Locate and Build
+      shell: pwsh
+      run: |
+        # 1. Find the actual folder containing CMakeLists.txt
+        $cmakeFile = Get-ChildItem -Path . -Filter "CMakeLists.txt" -Recurse | Select-Object -First 1
+        if ($null -eq $cmakeFile) {
+            Write-Error "Could not find CMakeLists.txt anywhere!"
+            exit 1
+        }
+        $sourceDir = $cmakeFile.DirectoryName
+        Write-Host "Found code at: $sourceDir"
+
+        # 2. Run CMake from that specific folder
+        cmake -B build -S $sourceDir -A x64
+        cmake --build build --config Release
+
+    - name: Upload DLL
       uses: actions/upload-artifact@v4
       with:
         name: Lumen-DLL
