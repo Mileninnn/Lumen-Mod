@@ -5,10 +5,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
 
-# --- ZIP DOWNLOAD (No Password Needed) ---
+# --- CORRECT ZIP LINKS (Verified) ---
 FetchContent_Declare(
   minhook
-  URL https://github.com/TsudaKageyasu/minhook/archive/refs/heads/main.zip
+  URL https://github.com/TsudaKageyasu/minhook/archive/refs/tags/v1.3.3.zip
 )
 FetchContent_MakeAvailable(minhook)
 
