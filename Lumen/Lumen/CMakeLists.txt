@@ -4,17 +4,17 @@ project(Lumen)
 set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
+
+# --- ZIP DOWNLOAD (No Password Needed) ---
 FetchContent_Declare(
   minhook
-  GIT_REPOSITORY https://github.com/TsudaKageyasu/minhook.git
-  GIT_TAG main
+  URL https://github.com/TsudaKageyasu/minhook/archive/refs/heads/main.zip
 )
 FetchContent_MakeAvailable(minhook)
 
 FetchContent_Declare(
   imgui
-  GIT_REPOSITORY https://github.com/ocornut/imgui.git
-  GIT_TAG v1.90.4
+  URL https://github.com/ocornut/imgui/archive/refs/tags/v1.90.4.zip
 )
 FetchContent_MakeAvailable(imgui)
 
