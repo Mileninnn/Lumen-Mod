@@ -1,0 +1,7 @@
+{
+  "name": "Lumen",
+  "entry": "Lumen.dll",
+  "type": "preload-native",
+  "version": "0.1.0",
+  "description": "In-game menu (press backslash) for simulation/vertical distance and culling options"
+}
