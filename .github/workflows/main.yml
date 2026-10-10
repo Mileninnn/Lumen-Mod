@@ -12,19 +12,22 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Find CMakeLists.txt
+    - name: Find and Build
+      shell: pwsh
       run: |
-        echo "Searching for CMakeLists.txt..."
-        dir /s /b CMakeLists.txt
+        Write-Host "Searching for CMakeLists.txt..."
+        $cmakeFile = Get-ChildItem -Path . -Filter "CMakeLists.txt" -Recurse | Select-Object -First 1
 
-    - name: Configure CMake
-      run: |
-        $path = (dir /s /b CMakeLists.txt | Split-Path -Parent)
-        echo "Building from: $path"
-        cmake -B build -S $path -A x64
+        if ($null -eq $cmakeFile) {
+            Write-Error "Could not find CMakeLists.txt anywhere in the repository!"
+            exit 1
+        }
 
-    - name: Build Project
-      run: cmake --build build --config Release
+        $sourceDir = $cmakeFile.DirectoryName
+        Write-Host "Found CMakeLists.txt at: $sourceDir"
+
+        cmake -B build -S $sourceDir -A x64
+        cmake --build build --config Release
 
     - name: Upload DLL
       uses: actions/upload-artifact@v4
