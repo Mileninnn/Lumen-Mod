@@ -12,8 +12,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Find CMakeLists.txt
+      run: |
+        echo "Searching for CMakeLists.txt..."
+        dir /s /b CMakeLists.txt
+
     - name: Configure CMake
-      run: cmake -B build -S Lumen -A x64
+      run: |
+        $path = (dir /s /b CMakeLists.txt | Split-Path -Parent)
+        echo "Building from: $path"
+        cmake -B build -S $path -A x64
 
     - name: Build Project
       run: cmake --build build --config Release
